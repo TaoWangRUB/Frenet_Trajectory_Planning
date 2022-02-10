@@ -16,7 +16,8 @@ HEADERS +=  \
     src/measurement_package.h \
     src/quartic_poly.h \
     src/quintic_poly.h \
-    src/utils.h
+    src/utils.h \
+    src/car.h
 
 SOURCES += \
     src/frenet.cpp \
@@ -25,7 +26,8 @@ SOURCES += \
     src/globalpath.cpp \
     src/main.cpp \
     src/quartic_poly.cpp \
-    src/quintic_poly.cpp
+    src/quintic_poly.cpp \
+    src/car.cpp
 
 RESOURCES     = frenet.qrc
 
