@@ -149,6 +149,15 @@ void Plot_state(const VectorXd& mu, const MatrixXd& sigma, const Mapper& mapper,
 void plot_xy(const vector<double>& x, const vector<double>& y, map<string, string> style){
     plt::plot(x, y, style);
 }
+void draw_box(vector<vector<double>>& box){
+    vector<double> x, y;
+    for(auto& xy : box){
+        x.push_back(xy[0]);
+        y.push_back(xy[1]);
+    }
+    map<string, string> style{{"color", "red"}, {"linestyle", "-"}};
+    plot_xy(x, y, style);
+}
 void Pause() {
       plt::pause(0.01);
   }
