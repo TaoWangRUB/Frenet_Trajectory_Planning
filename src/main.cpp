@@ -11,6 +11,8 @@
 #include "globalpath.h"
 #include "frenet.h"
 
+#include "car.h"
+
 using namespace std;
 
 void check_arguments(int argc, char* argv[]) {
@@ -80,6 +82,8 @@ int main(int arc, char* argv[])
 
     auto area = 20.; // animation length [m]
 
+    // initialize car position
+    Car car;
     // save figure
     string imagesFolder = "./images";
     if (mkdir(imagesFolder.c_str(), 0777) == -1)
@@ -94,6 +98,9 @@ int main(int arc, char* argv[])
         traj.get_frenet_traj(s0, speed, d, d_d, d_dd);
         traj.get_cartisian();
         auto best = traj.get_optimal_path();
+        Pose p = vector<double>({best.x[0], best.y[0], best.yaw[0]});
+        car.set_pos(p);
+        auto host = car.get_bounding_box();
         // update initial condition
         s0 = best.s[1];
         speed = best.s_d[1];
@@ -103,6 +110,7 @@ int main(int arc, char* argv[])
 
         draw.plot_xy(path.x, path.y, pathStyle);
         draw.plot_xy(best.x, best.y, trajStyle);
+        draw.draw_box(host);
         draw.Pause();
         stringstream ss;
         ss << setfill('0') << setw(3) << i;
